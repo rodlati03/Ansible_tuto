@@ -1,0 +1,11 @@
+- name: "enlever l'existant"
+  shell: creates=/etc/mysql/mysql.cnf_BACKUP mv /etc/mysql/mysql.cnf /etc/mysql/mysql.cnf_BACKUP
+
+- name: "configuration des fichiers MySQL"
+  copy: src=/home/sophtan1989/myplatform/roles/config_files_db/files/mysql.cnf dest=/etc/mysql/mysql.cnf owner=sophtan1989 mode=0666
+
+- name: "Restart service MysQL"
+  service: 
+    name: mysql
+    state: started
+    enabled: yes

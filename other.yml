@@ -1,0 +1,7 @@
+- name: 'Get MySQL version with non-default credentials'
+  host: dbserver 
+  mysql_query:
+    login_user: 'sophtan1989'
+    login_password: "Sophtan@2018"
+    filter: version
+

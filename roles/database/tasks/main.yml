@@ -1,0 +1,35 @@
+---
+- name: "Installing DATABASE packages"
+  apt: pkg={{ item }} state=latest
+  with_items:
+  - dnsutils
+  - mysql-server
+  - mysql-client
+  - python3-pymysql
+  - python3-mysqldb
+  - libmysqlclient-dev
+
+- name: "Start and enable mysql service"
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: "creation user DATABASE"
+  mysql_user:
+    login_user: "{{ log_user }}"
+    login_password: "{{ log_password }}"
+    name: "{{ dbuser }}"
+    password: "{{ upassword }}"
+    priv: "*.*:ALL"
+    host: '192.168.1.130'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+
+- name: "creation application DATABASE"
+  mysql_db:
+    login_user: "{{ log_user }}"
+    login_password: "{{ log_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: "{{ dbname }}"
+    state: present

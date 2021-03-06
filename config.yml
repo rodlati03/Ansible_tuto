@@ -1,0 +1,5 @@
+- hosts: dbserver
+  become: true
+  roles:
+  - config_files_db
+

@@ -1,0 +1,14 @@
+---
+- hosts: appserver
+  become: true
+  roles:
+  - web
+
+
+- hosts: dbserver
+  become: true
+  roles:
+  - database
+  - config_files_db
+  vars_files:
+  - "group_vars/dbserver" 

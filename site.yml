@@ -1,0 +1,6 @@
+- hosts: dbserver
+  roles:
+  - database
+  vars_files:
+  - "group_vars/dbserver"
+
